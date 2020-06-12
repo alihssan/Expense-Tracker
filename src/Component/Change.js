@@ -2,7 +2,7 @@ import React,{useReducer,useState} from 'react'
 import Data from './Data'
 import Price from './Price'
 import History from './History'
-import Combine_Action from './actions'
+import {Combine_Action} from './actions'
 import reducer from './Reducer'
  function handleTransaction(st,dispatch,sethistory,setincome,setexpense,Income,Expense,text){
      st=parseInt(st);
@@ -23,7 +23,7 @@ import reducer from './Reducer'
     const [Expense,setexpense]=useState(0);
     const [history,sethistory]=useState([]);
     const [text,settext]=useState("");
-    const data={state:state,history:history,sethistory:sethistory}
+    const data={state:state,history:history,sethistory:sethistory,income:setincome,expense:setexpense,setst:setst,dispatch:dispatch}
     return(
         <Data.Provider value={data}>
             <Price/>

@@ -1,13 +1,32 @@
 import React,{useContext} from 'react'
 import Data from './Data'
-const handleClear=(sethistory,val)=>{
+import {Combine_Action} from './actions'
+
+const handleClear=(sethistory,val,setIncome,setExpense,setst,dispatch)=>{
     sethistory(prev=>prev.filter(i=>i.value!==val.value))
+    if(val.value>=0){
+    setIncome(prev=>prev-val.value)
+    setst(prev=>prev-val.value)
+    dispatch(Combine_Action(-val.value))
+}
+    else if(val.value<0){
+    setExpense(prev=>prev-val.value)
+    setst(prev=>prev-val.value)
+    dispatch(Combine_Action(-val.value))
+
+
+}
+
     
 }
 const History=()=>{
     const context=useContext(Data)
     let history=context.history;
     const sethistory=context.sethistory;
+    const setIncome=context.income;
+    const setExpense=context.expense;
+    const setst=context.setst;
+    const dispatch=context.dispatch;
     return(
         <div className="history_cont">
             <h1>History</h1>
@@ -20,7 +39,7 @@ const History=()=>{
             backgroundColor: "white",
             boxShadow: "2px 2px 2px grey",
         }}>
-            <button style={{marginTop:"15px",marginLeft:"10px",backgroundColor:val.value>=0 ?"green" : "red"}}onClick={()=>handleClear(sethistory,val)}>X</button>
+            <button style={{marginTop:"15px",marginLeft:"10px",backgroundColor:val.value>=0 ?"green" : "red"}} onClick={()=>handleClear(sethistory,val,setIncome,setExpense,setst,dispatch)}>X</button>
             <p className="blo" key={val.text}>{val.text}</p>
             <p className="blo2" key={val.value}>{val.value}</p>
 
