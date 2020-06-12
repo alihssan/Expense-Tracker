@@ -1,11 +1,13 @@
 import React,{useContext} from 'react'
 import Data from './Data'
-
+const handleClear=(sethistory,val)=>{
+    sethistory(prev=>prev.filter(i=>i.value!==val.value))
+    
+}
 const History=()=>{
     const context=useContext(Data)
     let history=context.history;
-    console.log(history)
-   
+    const sethistory=context.sethistory;
     return(
         <div className="history_cont">
             <h1>History</h1>
@@ -17,7 +19,8 @@ const History=()=>{
             height: "50px",
             backgroundColor: "white",
             boxShadow: "2px 2px 2px grey",
-        }}> 
+        }}>
+            <button style={{marginTop:"15px",marginLeft:"10px",backgroundColor:val.value>=0 ?"green" : "red"}}onClick={()=>handleClear(sethistory,val)}>X</button>
             <p className="blo" key={val.text}>{val.text}</p>
             <p className="blo2" key={val.value}>{val.value}</p>
 

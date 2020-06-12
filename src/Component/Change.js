@@ -23,7 +23,7 @@ import reducer from './Reducer'
     const [Expense,setexpense]=useState(0);
     const [history,sethistory]=useState([]);
     const [text,settext]=useState("");
-    const data={state:state,history:history}
+    const data={state:state,history:history,sethistory:sethistory}
     return(
         <Data.Provider value={data}>
             <Price/>
